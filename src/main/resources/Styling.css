@@ -1,0 +1,33 @@
+.tab-pane-section {
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-color: #CBE3DB;
+    -fx-background-color: #F9FFFC;
+}
+
+
+.tab-section {
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-background-color:
+        linear-gradient(#6B9080, #E4F4EE),
+        linear-gradient(#6B9080 0%, #E4F4EE 20%, #CBE3DB 100%),
+        linear-gradient(#6B9080 0%, #F9FFFC 50%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.header-section{
+    -fx-color: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 15.5px;
+}
+.accordion-section{
+    -fx-font-weight: bold;
+}

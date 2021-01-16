@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import java.net.URL?>
+<TabPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DentistAppointmentController"
+         styleClass="tab-pane-section">
+    <stylesheets>
+        <URL value="@Styling.css" />
+    </stylesheets>
+    <Tab text="Patients" styleClass="tab-section">
+        <GridPane styleClass="grid-pane-section"  alignment="CENTER" hgap="50.0" vgap="10.0">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Text text="Patient list:" styleClass="header-section"
+                  GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="LEFT"/>
+            <Button styleClass="button" onAction="#refreshButtonPatientListHandler" text="Refresh"
+                    textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                    GridPane.halignment="RIGHT" prefHeight="30" prefWidth="70"/>
+
+            <TableView fx:id="patientTable" onMouseClicked="#autoFillPatientInformation" GridPane.columnIndex="0"
+                       GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="10">
+                <columns>
+                    <TableColumn text="ID" prefWidth="50">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="iD"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Name">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="PNC">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="cNP"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Phone number">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="phoneNumber"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Email">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="email"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+
+            <Text text="The total number of patients:" styleClass="header-section"
+                  fill="black" GridPane.columnIndex="0" GridPane.rowIndex="12"
+                  GridPane.halignment="LEFT"/>
+            <Text fx:id="totalNumberOfPatients" styleClass="header-section"
+                  GridPane.columnIndex="1" GridPane.rowIndex="12" GridPane.halignment="LEFT"/>
+
+            <Text text="Filter patients by:" styleClass="header-section"
+                  GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.columnSpan="2"
+                  GridPane.halignment="LEFT"/>
+            <Accordion styleClass="accordion-section" GridPane.rowIndex="1" GridPane.columnIndex="3" GridPane.columnSpan="2">
+                <panes>
+                    <TitledPane text="ID" >
+                        <GridPane hgap="20">
+                            <TextField fx:id="idFilterPatient" promptText="Enter the patient's ID"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterPatientByID" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                    <TitledPane text="Name">
+                        <GridPane hgap="20">
+                            <TextField fx:id="nameFilterPatient" promptText="Enter the patient's name"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterPatientByName" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                    <TitledPane text="PNC">
+                        <GridPane hgap="20">
+                            <TextField fx:id="cnpFilterPatient" promptText="Enter the patient's PNC"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterPatientByCNP" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                </panes>
+            </Accordion>
+
+            <Text text=" " GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+            <Text text="Patient information:" styleClass="header-section"
+                  GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.columnSpan="2"
+                  GridPane.halignment="LEFT"/>
+            <Button styleClass="button" fx:id="refreshButtonPatientInformation" onAction="#refreshButtonPatientInformation"
+                    text="Refresh" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4"
+                    GridPane.halignment="RIGHT" prefHeight="30" prefWidth="70"/>
+            <Label text="ID" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+            <Text fx:id="idPatient" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+            <Label text="Name" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+            <TextField fx:id="namePatient" promptText="Enter the patient's name" GridPane.columnIndex="4"
+                       GridPane.rowIndex="6"/>
+            <Label text="PNC" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+            <TextField fx:id="cnpPatient" promptText="Enter the patient's PNC" GridPane.columnIndex="4"
+                       GridPane.rowIndex="7"/>
+            <Label text="Phone number" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+            <TextField fx:id="phoneNumberPatient" promptText="Enter the patient's phone number"
+                       GridPane.columnIndex="4" GridPane.rowIndex="8"/>
+            <Label text="Email" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+            <TextField fx:id="emailPatient" promptText="Enter the patient's email" GridPane.columnIndex="4"
+                       GridPane.rowIndex="9"/>
+
+            <HBox GridPane.columnIndex="3" GridPane.rowIndex="10" GridPane.columnSpan="2" alignment="TOP_CENTER"
+                  spacing="30">
+                <padding>
+                    <Insets top="10"/>
+                </padding>
+                <Button styleClass="button" text="Add" onAction="#addPatientHandler" prefHeight="30" prefWidth="70"/>
+                <Button styleClass="button" text="Delete" onAction="#deletePatientHandler" prefHeight="30" prefWidth="70"/>
+                <Button styleClass="button" text="Update" onAction="#updatePatientHandler" prefHeight="30" prefWidth="70"/>
+            </HBox>
+
+            <ImageView fitHeight="100" fitWidth="150" GridPane.rowIndex="12" GridPane.columnIndex="4"  GridPane.halignment="RIGHT">
+                <Image url="@tooth.png"/>
+            </ImageView>
+        </GridPane>
+    </Tab>
+
+
+    <Tab text="Appointments" styleClass="tab-section">
+        <GridPane alignment="CENTER" hgap="50.0" vgap="10.0">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Text text="Appointment list:" styleClass="header-section"
+                  GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="LEFT"/>
+            <Button styleClass="button" onAction="#refreshButtonAppointmentListHandler"
+                    text="Refresh" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                    GridPane.halignment="RIGHT" prefHeight="30" prefWidth="70"/>
+
+            <TableView onMouseClicked="#autoFillAppointmentInformation" fx:id="appointmentTable"
+                       GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="11">
+                <columns>
+                    <TableColumn text="ID" prefWidth="50">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="iD"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="PatientID" prefWidth="70">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="patientID"/>
+                    </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Patient">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="patientName"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Service">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="service"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Date">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="date"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Time">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="timeString"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+
+            <Text text="Today's number of appointments:" styleClass="header-section"
+                  fill="black" GridPane.columnIndex="0" GridPane.rowIndex="13"
+                  GridPane.halignment="LEFT"/>
+            <Text fx:id="currentDateAppointmentsNo" styleClass="header-section"
+                  GridPane.columnIndex="1" GridPane.rowIndex="13" GridPane.halignment="LEFT"/>
+
+            <Text text="Filter appointments by:" styleClass="header-section"
+                  GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.columnSpan="2"
+                  GridPane.halignment="LEFT"/>
+            <Accordion styleClass="accordion-section" GridPane.rowIndex="1" GridPane.columnIndex="3" GridPane.columnSpan="2">
+                <panes>
+                    <TitledPane text="ID">
+                        <GridPane hgap="20">
+                            <TextField fx:id="idFilterAppointment" promptText="Enter the appointment ID"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterAppointmentByID" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                    <TitledPane text="Patient ID">
+                        <GridPane hgap="20">
+                            <TextField fx:id="idPatientFilterAppointment" promptText="Enter the patient's ID"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterAppointmentByPatientID" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                    <TitledPane text="Service">
+                        <GridPane hgap="20">
+                            <TextField fx:id="serviceFilterAppointment" promptText="Enter the service"
+                                       GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterAppointmentByService" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                    <TitledPane text="Date">
+                        <GridPane hgap="20">
+                            <DatePicker fx:id="dateFilterAppointment" promptText="Enter the date"
+                                        GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <Button styleClass="button" text="Go" onAction="#filterAppointmentByDate" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="0"/>
+                        </GridPane>
+                    </TitledPane>
+                </panes>
+            </Accordion>
+
+            <Text text="     " GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+            <Text text="Appointment information:" styleClass="header-section"
+                  GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.columnSpan="2"
+                  GridPane.halignment="LEFT"/>
+            <Button styleClass="button" fx:id="refreshButtonAppointmentInformation" onAction="#refreshButtonAppointmentInformation"
+                    text="Refresh" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4"
+                    GridPane.halignment="RIGHT" prefHeight="30" prefWidth="70"/>
+            <Label text="ID" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+            <Text fx:id="idAppointment" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+            <Label text="Patient ID" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+            <TextField fx:id="idPatientInAppointment" promptText="Enter the patient's ID" GridPane.columnIndex="4"
+                       GridPane.rowIndex="6"/>
+            <Label text="Service" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+            <TextField fx:id="serviceAppointment" promptText="Enter the service" GridPane.columnIndex="4"
+                       GridPane.rowIndex="7"/>
+            <Label text="Date" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+            <DatePicker fx:id="dateAppointment" promptText="Enter the date" GridPane.columnIndex="4"
+                        GridPane.rowIndex="8"/>
+            <Label text="Time" GridPane.columnIndex="3" GridPane.rowIndex="9"/>
+            <TextField fx:id="timeAppointment" promptText="hh:mm" GridPane.columnIndex="4" GridPane.rowIndex="9"/>
+            <HBox GridPane.columnIndex="3" GridPane.rowIndex="11" GridPane.columnSpan="2" alignment="TOP_CENTER"
+                  spacing="30">
+                <padding>
+                    <Insets top="10"/>
+                </padding>
+                <Button styleClass="button" text="Add" onAction="#addAppointmentHandler" prefHeight="30" prefWidth="70"/>
+                <Button styleClass="button" text="Delete" onAction="#deleteAppointmentHandler" prefHeight="30" prefWidth="70"/>
+                <Button styleClass="button" text="Update" onAction="#updateAppointmentHandler" prefHeight="30" prefWidth="70"/>
+            </HBox>
+
+            <ImageView fitHeight="70" fitWidth="100" GridPane.rowIndex="13" GridPane.columnIndex="4"  GridPane.halignment="RIGHT">
+                <Image url="@tooth.png"/>
+            </ImageView>
+
+        </GridPane>
+    </Tab>
+
+</TabPane>

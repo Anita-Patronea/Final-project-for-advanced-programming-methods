@@ -1,0 +1,8 @@
+9
+1|Pop Ioana|6023548912154|0745879252|ioanapop@gmail.com
+2|Pop Mihai|1234567890987|0789456123|popmihai@gmail.com
+3|Muresan Andrei|4589127634332|0721654987|mureandr@yahoo.com
+4|Bucur Iulia|2136458972753|0711556448|bucur_iulia01@yahoo.com
+5|Mare Laur|5481204796325|0792929292|laur.Mare@gmail.com
+6|Sonea Cristina|5689485213789|0745789633|crs_sonea@gmail.com
+8|Boca Anca|5478981425689|0766489700|anca_b0@yahoo.com
